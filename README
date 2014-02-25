@@ -8,29 +8,22 @@ Results
 Testing csv/presidents.csv
 
                user     system      total        real
-csv        0.020000   0.000000   0.020000 (  0.026629)
-fastercsv  0.010000   0.000000   0.010000 (  0.001558)
-lightcsv   0.000000   0.000000   0.000000 (  0.002036)
-excelsior  0.000000   0.000000   0.000000 (  0.000305)
-ccsv       0.010000   0.000000   0.010000 (  0.011097)
-csvscan    0.000000   0.000000   0.000000 (  0.000221)
+CSV            0.010000   0.000000   0.010000 (  0.000632)
+smarter_csv    0.000000   0.000000   0.000000 (  0.002412)
+ccsv           0.000000   0.000000   0.000000 (  0.000110)
 
 Testing csv/geoip.csv
 
                user     system      total        real
-csv       52.720000   0.140000  52.860000 ( 53.465961)
-fastercsv 11.090000   0.050000  11.140000 ( 11.327960)
-lightcsv   5.470000   0.030000   5.500000 (  5.508147)
-excelsior  0.580000   0.010000   0.590000 (  0.592589)
-ccsv       0.470000   0.020000   0.490000 (  0.480324)
-csvscan    0.420000   0.010000   0.430000 (  0.435153)
+CSV            1.820000   0.000000   1.820000 (  1.831765)
+smarter_csv    16.920000  0.040000  16.960000 ( 17.000845)
+ccsv           0.100000   0.010000   0.110000 (  0.102375)
+
 
 Parsing Error Handling
 ======================
 
-While CSVScan, cCSV, and Excelsior may be the fastest, they do it by having little-to-no error catching/handling.
-
-The slowest three (CSV, FasterCSV, and LightCSV) do catch paring errors and raise exceptions for you to handle.
+It doesn't seem that ccsv has added any error handling capabilities since vonconrad (original csv-benchmark author) ran his tests.
 
 Credits
 =======
