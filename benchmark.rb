@@ -1,41 +1,24 @@
-require 'rubygems'
-require 'bundler/setup'
-
 require 'benchmark'
 
-require 'csv'
-require 'fastercsv'
+require 'csv'           #fastercsv is the built-in csv library as of ruby 1.9
+require 'smarter_csv'
 require 'ccsv'
-require 'csvscan'
-require 'excelsior'
-require 'lightcsv'
 
 ['csv/presidents.csv', 'csv/geoip.csv'].each do |file|
   puts "\nTesting #{file}\n\n"
 
   Benchmark.bm do |x|
-    x.report('csv      ') do
-      CSV.open(file, 'r', ',') {|row| row}
+
+    x.report('CSV         ') do
+      CSV.foreach(file, :col_sep =>',') {|row| row}
     end
 
-    x.report('fastercsv') do
-      FasterCSV.foreach(file, :col_sep =>',') {|row| row}
+    x.report('smarter_csv ') do
+      SmarterCSV.process(file, {:col_sep => ','}) {|row| row}
     end
 
-    x.report('lightcsv ') do
-      LightCsv.foreach(file) {|row| row}
-    end
-
-    x.report('excelsior') do
-      Excelsior::Reader.rows(File.open(file, 'r')) {|row| row}
-    end
-
-    x.report('ccsv     ') do
+    x.report('ccsv        ') do
       Ccsv.foreach(file) {|row| row}
-    end
-
-    x.report('csvscan  ') do
-      CSVScan.scan(File.open(file, 'r')) {|row| row}
     end
   end
 end
